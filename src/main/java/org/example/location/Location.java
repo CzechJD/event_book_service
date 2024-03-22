@@ -1,4 +1,4 @@
-package location;
+package org.example.location;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

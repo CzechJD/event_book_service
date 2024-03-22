@@ -1,4 +1,4 @@
-package location;
+package org.example.location;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

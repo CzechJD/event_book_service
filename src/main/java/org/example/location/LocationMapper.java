@@ -1,4 +1,4 @@
-package location;
+package org.example.location;
 
 import org.springframework.stereotype.Component;
 

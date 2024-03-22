@@ -1,4 +1,4 @@
-package location;
+package org.example.location;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.AllArgsConstructor;
