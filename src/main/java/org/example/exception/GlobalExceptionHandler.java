@@ -26,8 +26,8 @@ public class GlobalExceptionHandler {
         return buildErrorResponse("Сущность не найдена", e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(CapacityException.class)
-    protected ResponseEntity<ErrorMessageResponse> handleCapacityException(CapacityException e) {
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<ErrorMessageResponse> handleCapacityException(RuntimeException e) {
         return buildErrorResponse("Некорректная вместимость локации", e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
