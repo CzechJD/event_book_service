@@ -36,6 +36,10 @@ public class LocationService {
         LocationEntity foundEntity = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Сущность не найдена"));
 
+        if (location.getCapacity() > foundEntity.getCapacity()) {
+            throw new IllegalStateException("Новая вместимость не может быть больше предыдущей");
+        }
+
         foundEntity.setName(location.getName());
         foundEntity.setAddress(location.getAddress());
         foundEntity.setCapacity(location.getCapacity());
@@ -44,11 +48,11 @@ public class LocationService {
         LocationEntity savedEntity = repository.save(foundEntity);
         return mapper.fromEntityToLocation(savedEntity);
     }
+
     public void deleteLocation(Integer id) {
         repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Сущность не найдена"));
 
         repository.deleteById(id);
-
     }
 }

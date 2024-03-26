@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -26,8 +27,8 @@ public class GlobalExceptionHandler {
         return buildErrorResponse("Сущность не найдена", e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    protected ResponseEntity<ErrorMessageResponse> handleCapacityException(RuntimeException e) {
+    @ExceptionHandler(IllegalStateException.class)
+    protected ResponseEntity<ErrorMessageResponse> handleCapacityException(IllegalStateException e) {
         return buildErrorResponse("Некорректная вместимость локации", e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
