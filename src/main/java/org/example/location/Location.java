@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Location {
-    private Integer id;
-    private String name;
-    private String address;
-    private Integer capacity;
-    private String description;
+    private final Integer id;
+    private final String name;
+    private final String address;
+    private final Integer capacity;
+    private final String description;
 }

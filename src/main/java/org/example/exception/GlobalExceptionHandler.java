@@ -1,5 +1,6 @@
 package org.example.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,14 @@ public class GlobalExceptionHandler {
         return buildErrorResponse("Невалидный аргумент", errorMessage, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    protected ResponseEntity<ErrorMessageResponse> handleNotExistException(IllegalArgumentException e) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<ErrorMessageResponse> handleNotExistException(EntityNotFoundException e) {
         return buildErrorResponse("Сущность не найдена", e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(IllegalStateException.class)
-    protected ResponseEntity<ErrorMessageResponse> handleCapacityException(IllegalStateException e) {
-        return buildErrorResponse("Некорректная вместимость локации", e.getMessage(), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(IllegalArgumentException.class)
+    protected ResponseEntity<ErrorMessageResponse> handleCapacityException(IllegalArgumentException e) {
+        return buildErrorResponse("Невалидный аргумент", e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

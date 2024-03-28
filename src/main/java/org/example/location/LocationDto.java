@@ -9,13 +9,13 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LocationDto {
-    private Integer id;
+    private final Integer id;
     @NotBlank
-    private String name;
+    private final String name;
     @NotBlank
-    private String address;
+    private final String address;
     @NotNull
     @Min(5)
-    private Integer capacity;
-    private String description;
+    private final Integer capacity;
+    private final String description;
 }

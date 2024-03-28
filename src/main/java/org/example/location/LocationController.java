@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LocationController {
     private final LocationService locationService;
-    private LocationMapper mapper;
+    private final LocationMapper mapper;
 
     @GetMapping
     public ResponseEntity<List<LocationDto>> getAllLocations() {
