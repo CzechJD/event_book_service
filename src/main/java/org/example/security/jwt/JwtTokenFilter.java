@@ -41,17 +41,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         var jwt = header.substring(BEARER_PREFIX.length());
         var username = jwtService.extractUserNameFromClaims(jwt);
 
-        if (StringUtils.isNotEmpty(username) &&
+        if (username != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
             User user = userService.getByUsername(username);
 
             if (jwtService.isTokenValid(jwt, user)) {
-                SecurityContext context = SecurityContextHolder.createEmptyContext();
-                var token = new UsernamePasswordAuthenticationToken(
-                        user,
-                        null,
-                        user.getAuthorities()
-                );
+                var token =
+                        new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
                 token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(token);
@@ -59,7 +55,5 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-
     }
 }
-

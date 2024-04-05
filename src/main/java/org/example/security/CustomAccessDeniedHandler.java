@@ -1,9 +1,9 @@
 package org.example.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.example.exception.ErrorMessageResponse;
 import org.slf4j.Logger;
@@ -17,12 +17,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Component
-@Data
-@AllArgsConstructor
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private static final Logger log = LoggerFactory.getLogger(CustomAuthenticationEntryPoint.class);
-    public static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Override
     public void handle(HttpServletRequest request,

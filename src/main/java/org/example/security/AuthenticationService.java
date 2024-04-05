@@ -17,7 +17,7 @@ public class AuthenticationService {
     private final UserService userService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
-    AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
     public User signUp(SignUpRequest request) {
         var user = User.builder()

@@ -7,11 +7,9 @@ import org.example.security.SignUpRequest;
 import org.example.security.jwt.JwtAuthenticationResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.AccessDeniedException;
 
 @RestController
 @RequestMapping("/users")
@@ -28,9 +26,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.fromUserToDto(registeredUser));
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Integer userId) throws AccessDeniedException {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer userId) {
         User user = userService.getUserById(userId);
         return ResponseEntity.ok(userMapper.fromUserToDto(user));
     }
