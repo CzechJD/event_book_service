@@ -38,19 +38,21 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        var jwt = header.substring(BEARER_PREFIX.length());
-        var username = jwtService.extractUserNameFromClaims(jwt);
+        String jwt = header.substring(BEARER_PREFIX.length());
+        String username = jwtService.extractLoginUser(jwt);
 
         if (username != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
             User user = userService.getByUsername(username);
 
             if (jwtService.isTokenValid(jwt, user)) {
+                SecurityContext context = SecurityContextHolder.createEmptyContext();
                 var token =
                         new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
                 token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(token);
+                context.setAuthentication(token);
+                SecurityContextHolder.setContext(context);
             }
         }
 
