@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class SignInRequest {
     @NotBlank
-    private String login;
+    private final String login;
     @NotBlank
-    private String password;
+    private final String password;
 }

@@ -14,6 +14,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 @Component
@@ -31,6 +32,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                 accessDeniedException.getMessage(),
                 LocalDateTime.now());
 
+        response.setContentType("application/json");
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"));
         response.setStatus(HttpStatus.FORBIDDEN.value());
         response.getWriter().write(objectMapper.writeValueAsString(error));
     }
